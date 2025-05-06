@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_25f20dcb5bc7b3c3a30a82e2e6d69f5a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_25f20dcb5bc7b3c3a30a82e2e6d69f5a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_25f20dcb5bc7b3c3a30a82e2e6d69f5a = L.map(
+                "map_25f20dcb5bc7b3c3a30a82e2e6d69f5a",
+                {
+                    center: [20.7967, -156.3319],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_762d8220b3e2ba4ac77ea96c70b000fe = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca target=\"_blank\" href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca target=\"_blank\" href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+    var color_map_78e81641632e4b1cdabd998bd0068dca = {};
+
+    
+    color_map_78e81641632e4b1cdabd998bd0068dca.color = d3.scale.threshold()
+              .domain([0.0, 0.002004008016032064, 0.004008016032064128, 0.006012024048096192, 0.008016032064128256, 0.01002004008016032, 0.012024048096192385, 0.014028056112224449, 0.01603206412825651, 0.018036072144288578, 0.02004008016032064, 0.022044088176352707, 0.02404809619238477, 0.026052104208416832, 0.028056112224448898, 0.03006012024048096, 0.03206412825651302, 0.03406813627254509, 0.036072144288577156, 0.03807615230460922, 0.04008016032064128, 0.04208416833667335, 0.04408817635270541, 0.04609218436873747, 0.04809619238476954, 0.050100200400801605, 0.052104208416833664, 0.05410821643286573, 0.056112224448897796, 0.05811623246492986, 0.06012024048096192, 0.06212424849699399, 0.06412825651302605, 0.06613226452905811, 0.06813627254509018, 0.07014028056112225, 0.07214428857715431, 0.07414829659318638, 0.07615230460921844, 0.0781563126252505, 0.08016032064128256, 0.08216432865731463, 0.0841683366733467, 0.08617234468937876, 0.08817635270541083, 0.09018036072144289, 0.09218436873747494, 0.09418837675350701, 0.09619238476953908, 0.09819639278557114, 0.10020040080160321, 0.10220440881763528, 0.10420841683366733, 0.1062124248496994, 0.10821643286573146, 0.11022044088176353, 0.11222444889779559, 0.11422845691382766, 0.11623246492985972, 0.11823647294589178, 0.12024048096192384, 0.12224448897795591, 0.12424849699398798, 0.12625250501002003, 0.1282565130260521, 0.13026052104208416, 0.13226452905811623, 0.1342685370741483, 0.13627254509018036, 0.13827655310621242, 0.1402805611222445, 0.14228456913827656, 0.14428857715430862, 0.1462925851703407, 0.14829659318637275, 0.15030060120240482, 0.1523046092184369, 0.15430861723446893, 0.156312625250501, 0.15831663326653306, 0.16032064128256512, 0.1623246492985972, 0.16432865731462926, 0.16633266533066132, 0.1683366733466934, 0.17034068136272545, 0.17234468937875752, 0.1743486973947896, 0.17635270541082165, 0.17835671342685372, 0.18036072144288579, 0.18236472945891782, 0.1843687374749499, 0.18637274549098196, 0.18837675350701402, 0.1903807615230461, 0.19238476953907815, 0.19438877755511022, 0.1963927855711423, 0.19839679358717435, 0.20040080160320642, 0.20240480961923848, 0.20440881763527055, 0.20641282565130262, 0.20841683366733466, 0.21042084168336672, 0.2124248496993988, 0.21442885771543085, 0.21643286573146292, 0.218436873747495, 0.22044088176352705, 0.22244488977955912, 0.22444889779559118, 0.22645290581162325, 0.22845691382765532, 0.23046092184368738, 0.23246492985971945, 0.23446893787575152, 0.23647294589178355, 0.23847695390781562, 0.24048096192384769, 0.24248496993987975, 0.24448897795591182, 0.24649298597194388, 0.24849699398797595, 0.250501002004008, 0.25250501002004005, 0.2545090180360721, 0.2565130260521042, 0.25851703406813625, 0.2605210420841683, 0.2625250501002004, 0.26452905811623245, 0.2665330661322645, 0.2685370741482966, 0.27054108216432865, 0.2725450901803607, 0.2745490981963928, 0.27655310621242485, 0.2785571142284569, 0.280561122244489, 0.28256513026052105, 0.2845691382765531, 0.2865731462925852, 0.28857715430861725, 0.2905811623246493, 0.2925851703406814, 0.29458917835671344, 0.2965931863727455, 0.2985971943887776, 0.30060120240480964, 0.3026052104208417, 0.3046092184368738, 0.3066132264529058, 0.30861723446893785, 0.3106212424849699, 0.312625250501002, 0.31462925851703405, 0.3166332665330661, 0.3186372745490982, 0.32064128256513025, 0.3226452905811623, 0.3246492985971944, 0.32665330661322645, 0.3286573146292585, 0.3306613226452906, 0.33266533066132264, 0.3346693386773547, 0.3366733466933868, 0.33867735470941884, 0.3406813627254509, 0.342685370741483, 0.34468937875751504, 0.3466933867735471, 0.3486973947895792, 0.35070140280561124, 0.3527054108216433, 0.35470941883767537, 0.35671342685370744, 0.3587174348697395, 0.36072144288577157, 0.3627254509018036, 0.36472945891783565, 0.3667334669338677, 0.3687374749498998, 0.37074148296593185, 0.3727454909819639, 0.374749498997996, 0.37675350701402804, 0.3787575150300601, 0.3807615230460922, 0.38276553106212424, 0.3847695390781563, 0.3867735470941884, 0.38877755511022044, 0.3907815631262525, 0.3927855711422846, 0.39478957915831664, 0.3967935871743487, 0.39879759519038077, 0.40080160320641284, 0.4028056112224449, 0.40480961923847697, 0.40681362725450904, 0.4088176352705411, 0.41082164328657317, 0.41282565130260523, 0.4148296593186373, 0.4168336673346693, 0.4188376753507014, 0.42084168336673344, 0.4228456913827655, 0.4248496993987976, 0.42685370741482964, 0.4288577154308617, 0.4308617234468938, 0.43286573146292584, 0.4348697394789579, 0.43687374749499, 0.43887775551102204, 0.4408817635270541, 0.44288577154308617, 0.44488977955911824, 0.4468937875751503, 0.44889779559118237, 0.45090180360721444, 0.4529058116232465, 0.45490981963927857, 0.45691382765531063, 0.4589178356713427, 0.46092184368737477, 0.46292585170340683, 0.4649298597194389, 0.46693386773547096, 0.46893787575150303, 0.4709418837675351, 0.4729458917835671, 0.4749498997995992, 0.47695390781563124, 0.4789579158316633, 0.48096192384769537, 0.48296593186372744, 0.4849699398797595, 0.48697394789579157, 0.48897795591182364, 0.4909819639278557, 0.49298597194388777, 0.49498997995991983, 0.4969939879759519, 0.49899799599198397, 0.501002004008016, 0.503006012024048, 0.5050100200400801, 0.5070140280561122, 0.5090180360721442, 0.5110220440881763, 0.5130260521042084, 0.5150300601202404, 0.5170340681362725, 0.5190380761523046, 0.5210420841683366, 0.5230460921843687, 0.5250501002004008, 0.5270541082164328, 0.5290581162324649, 0.531062124248497, 0.533066132264529, 0.5350701402805611, 0.5370741482965932, 0.5390781563126252, 0.5410821643286573, 0.5430861723446894, 0.5450901803607214, 0.5470941883767535, 0.5490981963927856, 0.5511022044088176, 0.5531062124248497, 0.5551102204408818, 0.5571142284569138, 0.5591182364729459, 0.561122244488978, 0.56312625250501, 0.5651302605210421, 0.5671342685370742, 0.5691382765531062, 0.5711422845691383, 0.5731462925851704, 0.5751503006012024, 0.5771543086172345, 0.5791583166332666, 0.5811623246492986, 0.5831663326653307, 0.5851703406813628, 0.5871743486973948, 0.5891783567134269, 0.591182364729459, 0.593186372745491, 0.5951903807615231, 0.5971943887775552, 0.5991983967935872, 0.6012024048096193, 0.6032064128256514, 0.6052104208416834, 0.6072144288577155, 0.6092184368737475, 0.6112224448897795, 0.6132264529058116, 0.6152304609218436, 0.6172344689378757, 0.6192384769539078, 0.6212424849699398, 0.6232464929859719, 0.625250501002004, 0.627254509018036, 0.6292585170340681, 0.6312625250501002, 0.6332665330661322, 0.6352705410821643, 0.6372745490981964, 0.6392785571142284, 0.6412825651302605, 0.6432865731462926, 0.6452905811623246, 0.6472945891783567, 0.6492985971943888, 0.6513026052104208, 0.6533066132264529, 0.655310621242485, 0.657314629258517, 0.6593186372745491, 0.6613226452905812, 0.6633266533066132, 0.6653306613226453, 0.6673346693386774, 0.6693386773547094, 0.6713426853707415, 0.6733466933867736, 0.6753507014028056, 0.6773547094188377, 0.6793587174348698, 0.6813627254509018, 0.6833667334669339, 0.685370741482966, 0.687374749498998, 0.6893787575150301, 0.6913827655310621, 0.6933867735470942, 0.6953907815631263, 0.6973947895791583, 0.6993987975951904, 0.7014028056112225, 0.7034068136272545, 0.7054108216432866, 0.7074148296593187, 0.7094188376753507, 0.7114228456913828, 0.7134268537074149, 0.7154308617234469, 0.717434869739479, 0.7194388777555111, 0.7214428857715431, 0.7234468937875751, 0.7254509018036072, 0.7274549098196392, 0.7294589178356713, 0.7314629258517034, 0.7334669338677354, 0.7354709418837675, 0.7374749498997996, 0.7394789579158316, 0.7414829659318637, 0.7434869739478958, 0.7454909819639278, 0.7474949899799599, 0.749498997995992, 0.751503006012024, 0.7535070140280561, 0.7555110220440882, 0.7575150300601202, 0.7595190380761523, 0.7615230460921844, 0.7635270541082164, 0.7655310621242485, 0.7675350701402806, 0.7695390781563126, 0.7715430861723447, 0.7735470941883767, 0.7755511022044088, 0.7775551102204409, 0.779559118236473, 0.781563126252505, 0.7835671342685371, 0.7855711422845691, 0.7875751503006012, 0.7895791583166333, 0.7915831663326653, 0.7935871743486974, 0.7955911823647295, 0.7975951903807615, 0.7995991983967936, 0.8016032064128257, 0.8036072144288577, 0.8056112224448898, 0.8076152304609219, 0.8096192384769539, 0.811623246492986, 0.8136272545090181, 0.8156312625250501, 0.8176352705410822, 0.8196392785571143, 0.8216432865731463, 0.8236472945891784, 0.8256513026052105, 0.8276553106212425, 0.8296593186372746, 0.8316633266533067, 0.8336673346693386, 0.8356713426853707, 0.8376753507014028, 0.8396793587174348, 0.8416833667334669, 0.843687374749499, 0.845691382765531, 0.8476953907815631, 0.8496993987975952, 0.8517034068136272, 0.8537074148296593, 0.8557114228456913, 0.8577154308617234, 0.8597194388777555, 0.8617234468937875, 0.8637274549098196, 0.8657314629258517, 0.8677354709418837, 0.8697394789579158, 0.8717434869739479, 0.87374749498998, 0.875751503006012, 0.8777555110220441, 0.8797595190380761, 0.8817635270541082, 0.8837675350701403, 0.8857715430861723, 0.8877755511022044, 0.8897795591182365, 0.8917835671342685, 0.8937875751503006, 0.8957915831663327, 0.8977955911823647, 0.8997995991983968, 0.9018036072144289, 0.9038076152304609, 0.905811623246493, 0.9078156312625251, 0.9098196392785571, 0.9118236472945892, 0.9138276553106213, 0.9158316633266533, 0.9178356713426854, 0.9198396793587175, 0.9218436873747495, 0.9238476953907816, 0.9258517034068137, 0.9278557114228457, 0.9298597194388778, 0.9318637274549099, 0.9338677354709419, 0.935871743486974, 0.9378757515030061, 0.9398797595190381, 0.9418837675350702, 0.9438877755511023, 0.9458917835671342, 0.9478957915831663, 0.9498997995991983, 0.9519038076152304, 0.9539078156312625, 0.9559118236472945, 0.9579158316633266, 0.9599198396793587, 0.9619238476953907, 0.9639278557114228, 0.9659318637274549, 0.9679358717434869, 0.969939879759519, 0.9719438877755511, 0.9739478957915831, 0.9759519038076152, 0.9779559118236473, 0.9799599198396793, 0.9819639278557114, 0.9839679358717435, 0.9859719438877755, 0.9879759519038076, 0.9899799599198397, 0.9919839679358717, 0.9939879759519038, 0.9959919839679359, 0.9979959919839679, 1.0])
+              .range(['#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#d73027ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fc8d59ff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#fee08bff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#ffffbfff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#d9ef8bff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#91cf60ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff', '#1a9850ff']);
+    
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.x = d3.scale.linear()
+              .domain([0.0, 1.0])
+              .range([0, 450 - 50]);
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.legend = L.control({position: 'topright'});
+    color_map_78e81641632e4b1cdabd998bd0068dca.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_78e81641632e4b1cdabd998bd0068dca.legend.addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.xAxis = d3.svg.axis()
+        .scale(color_map_78e81641632e4b1cdabd998bd0068dca.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([0.0, 0.14285714285714285, 0.2857142857142857, 0.42857142857142855, 0.5714285714285714, 0.7142857142857143, 0.8571428571428571, 1.0]);
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.g = color_map_78e81641632e4b1cdabd998bd0068dca.svg.append("g")
+        .attr("class", "key")
+        .attr("transform", "translate(25,16)");
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.g.selectAll("rect")
+        .data(color_map_78e81641632e4b1cdabd998bd0068dca.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_78e81641632e4b1cdabd998bd0068dca.x(color_map_78e81641632e4b1cdabd998bd0068dca.color.domain()[i - 1]) : color_map_78e81641632e4b1cdabd998bd0068dca.x.range()[0],
+            x1: i < color_map_78e81641632e4b1cdabd998bd0068dca.color.domain().length ? color_map_78e81641632e4b1cdabd998bd0068dca.x(color_map_78e81641632e4b1cdabd998bd0068dca.color.domain()[i]) : color_map_78e81641632e4b1cdabd998bd0068dca.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_78e81641632e4b1cdabd998bd0068dca.g.call(color_map_78e81641632e4b1cdabd998bd0068dca.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .text("Proportion of Native Hawaiian Students");
+    
+            var circle_marker_43c126d19aebd4c2cc23031bc0eab3b6 = L.circleMarker(
+                [21.3596711, -157.9283164],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.797471730557685, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_dee7047b1f36412030254a3a9f0fc9de = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_f8d79efdc43ffa110d5b34e022f74cda = $(`<div id="html_f8d79efdc43ffa110d5b34e022f74cda" style="width: 100.0%; height: 100.0%;"><b>Admiral Arthur W. Radford High School</b><br>Total Enrollment: 1267<br>Native Hawaiian Students: 53<br>Percent Native Hawaiian: 4.2%</div>`)[0];
+                popup_dee7047b1f36412030254a3a9f0fc9de.setContent(html_f8d79efdc43ffa110d5b34e022f74cda);
+            
+        
+
+        circle_marker_43c126d19aebd4c2cc23031bc0eab3b6.bindPopup(popup_dee7047b1f36412030254a3a9f0fc9de)
+        ;
+
+        
+    
+    
+            var circle_marker_094d588958d79b862a67734e8e4faf81 = L.circleMarker(
+                [21.3844171, -157.9298137],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.771810295587505, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_be1146ba75db93e42c3d2a2bf464ae83 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ad724b8c16e92f6a90892cf3c53883ea = $(`<div id="html_ad724b8c16e92f6a90892cf3c53883ea" style="width: 100.0%; height: 100.0%;"><b>‘Aiea High School</b><br>Total Enrollment: 995<br>Native Hawaiian Students: 170<br>Percent Native Hawaiian: 17.1%</div>`)[0];
+                popup_be1146ba75db93e42c3d2a2bf464ae83.setContent(html_ad724b8c16e92f6a90892cf3c53883ea);
+            
+        
+
+        circle_marker_094d588958d79b862a67734e8e4faf81.bindPopup(popup_be1146ba75db93e42c3d2a2bf464ae83)
+        ;
+
+        
+    
+    
+            var circle_marker_61f3cdd2f2db6f4114a2de80324a4c5d = L.circleMarker(
+                [21.3469288, -157.8999639],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.715633383201094, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_f962681402a121f592c880d1e63fe249 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0a9cb27a70ade90699b6e329c98aa3b6 = $(`<div id="html_0a9cb27a70ade90699b6e329c98aa3b6" style="width: 100.0%; height: 100.0%;"><b>Moanalua High School</b><br>Total Enrollment: 2064<br>Native Hawaiian Students: 193<br>Percent Native Hawaiian: 9.4%</div>`)[0];
+                popup_f962681402a121f592c880d1e63fe249.setContent(html_0a9cb27a70ade90699b6e329c98aa3b6);
+            
+        
+
+        circle_marker_61f3cdd2f2db6f4114a2de80324a4c5d.bindPopup(popup_f962681402a121f592c880d1e63fe249)
+        ;
+
+        
+    
+    
+            var circle_marker_53ab877773d5ec3263ff215b6e63fab7 = L.circleMarker(
+                [21.5004684, -158.012041],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.155644370746373, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_d9d85055aa73cffd880f423ada27fccd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_1a394ab6973c91f7bf8c1773abea5832 = $(`<div id="html_1a394ab6973c91f7bf8c1773abea5832" style="width: 100.0%; height: 100.0%;"><b>Leilehua High School</b><br>Total Enrollment: 1625<br>Native Hawaiian Students: 265<br>Percent Native Hawaiian: 16.3%</div>`)[0];
+                popup_d9d85055aa73cffd880f423ada27fccd.setContent(html_1a394ab6973c91f7bf8c1773abea5832);
+            
+        
+
+        circle_marker_53ab877773d5ec3263ff215b6e63fab7.bindPopup(popup_d9d85055aa73cffd880f423ada27fccd)
+        ;
+
+        
+    
+    
+            var circle_marker_944fc9ab4d81035a847d100cd95bba58 = L.circleMarker(
+                [21.4533251, -158.0115079],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.3229145242012, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_578cc389c7c6a693031f72323907ae67 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c480823f7437b9955d653f0925501466 = $(`<div id="html_c480823f7437b9955d653f0925501466" style="width: 100.0%; height: 100.0%;"><b>Mililani High School</b><br>Total Enrollment: 2565<br>Native Hawaiian Students: 333<br>Percent Native Hawaiian: 13.0%</div>`)[0];
+                popup_578cc389c7c6a693031f72323907ae67.setContent(html_c480823f7437b9955d653f0925501466);
+            
+        
+
+        circle_marker_944fc9ab4d81035a847d100cd95bba58.bindPopup(popup_578cc389c7c6a693031f72323907ae67)
+        ;
+
+        
+    
+    
+            var circle_marker_58e084ff6cb9d64b6e35d090e5b4cebb = L.circleMarker(
+                [21.2851056, -157.6961378],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.029386365926403, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_936cd927a070e4a9489261063106bf90 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d0edb224f33f2f4d43deb7c247ca58d7 = $(`<div id="html_d0edb224f33f2f4d43deb7c247ca58d7" style="width: 100.0%; height: 100.0%;"><b>Henry J. Kaiser High School</b><br>Total Enrollment: 1160<br>Native Hawaiian Students: 154<br>Percent Native Hawaiian: 13.3%</div>`)[0];
+                popup_936cd927a070e4a9489261063106bf90.setContent(html_d0edb224f33f2f4d43deb7c247ca58d7);
+            
+        
+
+        circle_marker_58e084ff6cb9d64b6e35d090e5b4cebb.bindPopup(popup_936cd927a070e4a9489261063106bf90)
+        ;
+
+        
+    
+    
+            var circle_marker_c05d3b0b0b9455f12fae4607fc83a8e5 = L.circleMarker(
+                [21.2792233, -157.7738219],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.801595676963167, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_2d184da624ac999188eedc9a6bd588be = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_711b8abe2b85a0784f7a6aa1dac2bc74 = $(`<div id="html_711b8abe2b85a0784f7a6aa1dac2bc74" style="width: 100.0%; height: 100.0%;"><b>Kalani High School</b><br>Total Enrollment: 1414<br>Native Hawaiian Students: 98<br>Percent Native Hawaiian: 6.9%</div>`)[0];
+                popup_2d184da624ac999188eedc9a6bd588be.setContent(html_711b8abe2b85a0784f7a6aa1dac2bc74);
+            
+        
+
+        circle_marker_c05d3b0b0b9455f12fae4607fc83a8e5.bindPopup(popup_2d184da624ac999188eedc9a6bd588be)
+        ;
+
+        
+    
+    
+            var circle_marker_df89eab19b22d3bc9c819f36f4da1f55 = L.circleMarker(
+                [21.3297, -157.8677],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.65375234502974, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_a81864387966554b199f3e5aef55ada5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_7d4a2f80dd288ec3158f42df3eecf8f6 = $(`<div id="html_7d4a2f80dd288ec3158f42df3eecf8f6" style="width: 100.0%; height: 100.0%;"><b>Wallace Rider Farrington High School</b><br>Total Enrollment: 2238<br>Native Hawaiian Students: 199<br>Percent Native Hawaiian: 8.9%</div>`)[0];
+                popup_a81864387966554b199f3e5aef55ada5.setContent(html_7d4a2f80dd288ec3158f42df3eecf8f6);
+            
+        
+
+        circle_marker_df89eab19b22d3bc9c819f36f4da1f55.bindPopup(popup_a81864387966554b199f3e5aef55ada5)
+        ;
+
+        
+    
+    
+            var circle_marker_785d7c7e10a2a1a47e0a2e8ffcacb7b5 = L.circleMarker(
+                [21.2857883, -157.8175793],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.449899597988733, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_a18c66dfa562d3a6696678c69c26f70b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8f01633bef7064d6d8de2371253d4336 = $(`<div id="html_8f01633bef7064d6d8de2371253d4336" style="width: 100.0%; height: 100.0%;"><b>Kaimukï High School</b><br>Total Enrollment: 620<br>Native Hawaiian Students: 92<br>Percent Native Hawaiian: 14.8%</div>`)[0];
+                popup_a18c66dfa562d3a6696678c69c26f70b.setContent(html_8f01633bef7064d6d8de2371253d4336);
+            
+        
+
+        circle_marker_785d7c7e10a2a1a47e0a2e8ffcacb7b5.bindPopup(popup_a18c66dfa562d3a6696678c69c26f70b)
+        ;
+
+        
+    
+    
+            var circle_marker_cfb5c4db1e3046daf1b21cf0423f45cc = L.circleMarker(
+                [21.3089, -157.8341],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.9274932307477, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_dd1288f6962e02ba6a726903f290fc72 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3d2cfa5ab3fb6547ee9f5c23f65c6fb5 = $(`<div id="html_3d2cfa5ab3fb6547ee9f5c23f65c6fb5" style="width: 100.0%; height: 100.0%;"><b>Theodore Roosevelt High School</b><br>Total Enrollment: 1433<br>Native Hawaiian Students: 228<br>Percent Native Hawaiian: 15.9%</div>`)[0];
+                popup_dd1288f6962e02ba6a726903f290fc72.setContent(html_3d2cfa5ab3fb6547ee9f5c23f65c6fb5);
+            
+        
+
+        circle_marker_cfb5c4db1e3046daf1b21cf0423f45cc.bindPopup(popup_dd1288f6962e02ba6a726903f290fc72)
+        ;
+
+        
+    
+    
+            var circle_marker_b9d6a7a563e309384bcd1a93614fcff9 = L.circleMarker(
+                [21.2975, -157.8511],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.3778223750761, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_9c1d113ea9d3693d0a5654564f8ef1f3 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c8c818fe13d9b649cc92d66f9caaa847 = $(`<div id="html_c8c818fe13d9b649cc92d66f9caaa847" style="width: 100.0%; height: 100.0%;"><b>William McKinley High School</b><br>Total Enrollment: 1502<br>Native Hawaiian Students: 130<br>Percent Native Hawaiian: 8.7%</div>`)[0];
+                popup_9c1d113ea9d3693d0a5654564f8ef1f3.setContent(html_c8c818fe13d9b649cc92d66f9caaa847);
+            
+        
+
+        circle_marker_b9d6a7a563e309384bcd1a93614fcff9.bindPopup(popup_9c1d113ea9d3693d0a5654564f8ef1f3)
+        ;
+
+        
+    
+    
+            var circle_marker_78e7f4b7725bb9941d2f2825b34bf183 = L.circleMarker(
+                [21.3158135, -158.0084275],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.56356290467544, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_d9d0de3182752ab2f817ea0bbf4dfeee = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d32ab454299c6c2499d654a7bff7ef1b = $(`<div id="html_d32ab454299c6c2499d654a7bff7ef1b" style="width: 100.0%; height: 100.0%;"><b>James Campbell High School</b><br>Total Enrollment: 3039<br>Native Hawaiian Students: 437<br>Percent Native Hawaiian: 14.4%</div>`)[0];
+                popup_d9d0de3182752ab2f817ea0bbf4dfeee.setContent(html_d32ab454299c6c2499d654a7bff7ef1b);
+            
+        
+
+        circle_marker_78e7f4b7725bb9941d2f2825b34bf183.bindPopup(popup_d9d0de3182752ab2f817ea0bbf4dfeee)
+        ;
+
+        
+    
+    
+            var circle_marker_d029cc6bff15f3bbe8b5d87a198a1d11 = L.circleMarker(
+                [21.3346, -158.0554],
+                {"bubblingMouseEvents": true, "color": "#d9ef8bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d9ef8bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.284902544988268, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_5e3786e088b02d16d7f1bdd1ac8214b5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2612dacd3f61ccce54fad07cfd3fd552 = $(`<div id="html_2612dacd3f61ccce54fad07cfd3fd552" style="width: 100.0%; height: 100.0%;"><b>The Kapolei Charter School By Goodwill Hawaiʻi1</b><br>Total Enrollment: 158<br>Native Hawaiian Students: 102<br>Percent Native Hawaiian: 64.6%</div>`)[0];
+                popup_5e3786e088b02d16d7f1bdd1ac8214b5.setContent(html_2612dacd3f61ccce54fad07cfd3fd552);
+            
+        
+
+        circle_marker_d029cc6bff15f3bbe8b5d87a198a1d11.bindPopup(popup_5e3786e088b02d16d7f1bdd1ac8214b5)
+        ;
+
+        
+    
+    
+            var circle_marker_8ab2b7fc9e9edbc135e44d0f9b5ce507 = L.circleMarker(
+                [21.3272814, -158.0678538],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.5, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_59690cf42a313d4d79cb3ffae11a53e5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2db8e555764244568957056f93c43215 = $(`<div id="html_2db8e555764244568957056f93c43215" style="width: 100.0%; height: 100.0%;"><b>Kapolei High School</b><br>Total Enrollment: 2025<br>Native Hawaiian Students: 567<br>Percent Native Hawaiian: 28.0%</div>`)[0];
+                popup_59690cf42a313d4d79cb3ffae11a53e5.setContent(html_2db8e555764244568957056f93c43215);
+            
+        
+
+        circle_marker_8ab2b7fc9e9edbc135e44d0f9b5ce507.bindPopup(popup_59690cf42a313d4d79cb3ffae11a53e5)
+        ;
+
+        
+    
+    
+            var circle_marker_5c5d8ca806843297a385ff7bc41b752f = L.circleMarker(
+                [21.4421, -158.1832],
+                {"bubblingMouseEvents": true, "color": "#ffffbfff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffbfff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.395092895334667, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_e6c927aceb73e391492902ffaedb26c7 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_eda38d50e6c587a1ab8cb0c3d7bb19ed = $(`<div id="html_eda38d50e6c587a1ab8cb0c3d7bb19ed" style="width: 100.0%; height: 100.0%;"><b>Wai‘anae High School</b><br>Total Enrollment: 1831<br>Native Hawaiian Students: 1044<br>Percent Native Hawaiian: 57.0%</div>`)[0];
+                popup_e6c927aceb73e391492902ffaedb26c7.setContent(html_eda38d50e6c587a1ab8cb0c3d7bb19ed);
+            
+        
+
+        circle_marker_5c5d8ca806843297a385ff7bc41b752f.bindPopup(popup_e6c927aceb73e391492902ffaedb26c7)
+        ;
+
+        
+    
+    
+            var circle_marker_b9099b89d43cdb75008741b2e875b649 = L.circleMarker(
+                [21.413171, -157.9518332],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.487175269905077, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_06d0247052c535ff136e2bd8c72bf3f5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2b9ba8777d809b5a391db916b184f06d = $(`<div id="html_2b9ba8777d809b5a391db916b184f06d" style="width: 100.0%; height: 100.0%;"><b>Pearl City High School</b><br>Total Enrollment: 1519<br>Native Hawaiian Students: 253<br>Percent Native Hawaiian: 16.7%</div>`)[0];
+                popup_06d0247052c535ff136e2bd8c72bf3f5.setContent(html_2b9ba8777d809b5a391db916b184f06d);
+            
+        
+
+        circle_marker_b9099b89d43cdb75008741b2e875b649.bindPopup(popup_06d0247052c535ff136e2bd8c72bf3f5)
+        ;
+
+        
+    
+    
+            var circle_marker_3809abb48d310f7c09ce50399f1b0909 = L.circleMarker(
+                [21.3887481, -157.9932318],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.79244075305786, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_01c7ac600fafe61b36e36370ef843165 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ac20232726611ead4dd1500766401940 = $(`<div id="html_ac20232726611ead4dd1500766401940" style="width: 100.0%; height: 100.0%;"><b>Waipahu High School</b><br>Total Enrollment: 2661<br>Native Hawaiian Students: 222<br>Percent Native Hawaiian: 8.3%</div>`)[0];
+                popup_01c7ac600fafe61b36e36370ef843165.setContent(html_ac20232726611ead4dd1500766401940);
+            
+        
+
+        circle_marker_3809abb48d310f7c09ce50399f1b0909.bindPopup(popup_01c7ac600fafe61b36e36370ef843165)
+        ;
+
+        
+    
+    
+            var circle_marker_7001f63abb2d7a2d4f5d4cc0f72deecf = L.circleMarker(
+                [21.4035221, -157.7949761],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.64331697709324, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_33054536ca1d4e7010118264b844af40 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_48c662932de41fc135129ab9e018e091 = $(`<div id="html_48c662932de41fc135129ab9e018e091" style="width: 100.0%; height: 100.0%;"><b>James B. Castle High School</b><br>Total Enrollment: 1108<br>Native Hawaiian Students: 453<br>Percent Native Hawaiian: 40.9%</div>`)[0];
+                popup_33054536ca1d4e7010118264b844af40.setContent(html_48c662932de41fc135129ab9e018e091);
+            
+        
+
+        circle_marker_7001f63abb2d7a2d4f5d4cc0f72deecf.bindPopup(popup_33054536ca1d4e7010118264b844af40)
+        ;
+
+        
+    
+    
+            var circle_marker_aa4ed56846ac1010b0335cf9cdc40926 = L.circleMarker(
+                [21.3845394, -157.7482415],
+                {"bubblingMouseEvents": true, "color": "#ffffbfff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffbfff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.45683229480096, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_04a728e1c57697c4b099c7ba141ab95b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_63cc17f6000e2936347237848127e6c6 = $(`<div id="html_63cc17f6000e2936347237848127e6c6" style="width: 100.0%; height: 100.0%;"><b>Kailua High School</b><br>Total Enrollment: 836<br>Native Hawaiian Students: 368<br>Percent Native Hawaiian: 44.0%</div>`)[0];
+                popup_04a728e1c57697c4b099c7ba141ab95b.setContent(html_63cc17f6000e2936347237848127e6c6);
+            
+        
+
+        circle_marker_aa4ed56846ac1010b0335cf9cdc40926.bindPopup(popup_04a728e1c57697c4b099c7ba141ab95b)
+        ;
+
+        
+    
+    
+            var circle_marker_6806407bbfbeabe2e5035bf0d6c87bc0 = L.circleMarker(
+                [21.4084266, -157.7571683],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.628738838327793, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_1d181d5fcf56510cf60c441caa95b6a7 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c62b48c661f438b8c0123a5b612ff8d2 = $(`<div id="html_c62b48c661f438b8c0123a5b612ff8d2" style="width: 100.0%; height: 100.0%;"><b>Kalaheo High School</b><br>Total Enrollment: 856<br>Native Hawaiian Students: 90<br>Percent Native Hawaiian: 10.5%</div>`)[0];
+                popup_1d181d5fcf56510cf60c441caa95b6a7.setContent(html_c62b48c661f438b8c0123a5b612ff8d2);
+            
+        
+
+        circle_marker_6806407bbfbeabe2e5035bf0d6c87bc0.bindPopup(popup_1d181d5fcf56510cf60c441caa95b6a7)
+        ;
+
+        
+    
+    
+            var circle_marker_535d4ddad05cd825afb8abef773cd568 = L.circleMarker(
+                [19.7217211, -155.0964053],
+                {"bubblingMouseEvents": true, "color": "#ffffbfff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffbfff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.145247311624054, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_3219b33221680f635de22c9896458b62 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6fcd19dba3ff36f985f9c8f9d8a1951e = $(`<div id="html_6fcd19dba3ff36f985f9c8f9d8a1951e" style="width: 100.0%; height: 100.0%;"><b>Hilo High School</b><br>Total Enrollment: 1317<br>Native Hawaiian Students: 590<br>Percent Native Hawaiian: 44.8%</div>`)[0];
+                popup_3219b33221680f635de22c9896458b62.setContent(html_6fcd19dba3ff36f985f9c8f9d8a1951e);
+            
+        
+
+        circle_marker_535d4ddad05cd825afb8abef773cd568.bindPopup(popup_3219b33221680f635de22c9896458b62)
+        ;
+
+        
+    
+    
+            var circle_marker_2994edf69e06239ccdc22e125e47859d = L.circleMarker(
+                [19.6995789, -155.0756162],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.006943105369107, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_ecdf20054510fe735de50979f5143ebd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_1bd26b438ff8e732c9cc0a6d55b6ff6d = $(`<div id="html_1bd26b438ff8e732c9cc0a6d55b6ff6d" style="width: 100.0%; height: 100.0%;"><b>Waiäkea High School</b><br>Total Enrollment: 1297<br>Native Hawaiian Students: 378<br>Percent Native Hawaiian: 29.1%</div>`)[0];
+                popup_ecdf20054510fe735de50979f5143ebd.setContent(html_1bd26b438ff8e732c9cc0a6d55b6ff6d);
+            
+        
+
+        circle_marker_2994edf69e06239ccdc22e125e47859d.bindPopup(popup_ecdf20054510fe735de50979f5143ebd)
+        ;
+
+        
+    
+    
+            var circle_marker_f7ec008f3e581acb9094a0508735e638 = L.circleMarker(
+                [19.6680744, -155.99788],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.03943276465977, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_2d8e03aff0df7446a1ce875e0b859fb4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_34a306482aac5a7a53a6757102fed531 = $(`<div id="html_34a306482aac5a7a53a6757102fed531" style="width: 100.0%; height: 100.0%;"><b>Kealakehe High School</b><br>Total Enrollment: 1450<br>Native Hawaiian Students: 367<br>Percent Native Hawaiian: 25.3%</div>`)[0];
+                popup_2d8e03aff0df7446a1ce875e0b859fb4.setContent(html_34a306482aac5a7a53a6757102fed531);
+            
+        
+
+        circle_marker_f7ec008f3e581acb9094a0508735e638.bindPopup(popup_2d8e03aff0df7446a1ce875e0b859fb4)
+        ;
+
+        
+    
+    
+            var circle_marker_d6750f8a4337d21911961506cac4c715 = L.circleMarker(
+                [20.2385376, -155.8191421],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.2915619758885, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_e00bb03e61d44a7b880927632b98f475 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_19a6d365518c844915aa053a798d8b09 = $(`<div id="html_19a6d365518c844915aa053a798d8b09" style="width: 100.0%; height: 100.0%;"><b>Kohala High School</b><br>Total Enrollment: 275<br>Native Hawaiian Students: 109<br>Percent Native Hawaiian: 39.6%</div>`)[0];
+                popup_e00bb03e61d44a7b880927632b98f475.setContent(html_19a6d365518c844915aa053a798d8b09);
+            
+        
+
+        circle_marker_d6750f8a4337d21911961506cac4c715.bindPopup(popup_e00bb03e61d44a7b880927632b98f475)
+        ;
+
+        
+    
+    
+            var circle_marker_67affbde44e1362d35e5039631df096f = L.circleMarker(
+                [19.5094848, -155.915141],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.337861650177967, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_f3a757e36f5394b278344ac685972444 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_1dbe8f0319e120f07171360703616fc8 = $(`<div id="html_1dbe8f0319e120f07171360703616fc8" style="width: 100.0%; height: 100.0%;"><b>Konawaena High School</b><br>Total Enrollment: 941<br>Native Hawaiian Students: 331<br>Percent Native Hawaiian: 35.2%</div>`)[0];
+                popup_f3a757e36f5394b278344ac685972444.setContent(html_1dbe8f0319e120f07171360703616fc8);
+            
+        
+
+        circle_marker_67affbde44e1362d35e5039631df096f.bindPopup(popup_f3a757e36f5394b278344ac685972444)
+        ;
+
+        
+    
+    
+            var circle_marker_f72b8671febecc4251899040a1329838 = L.circleMarker(
+                [19.6214, -155.0306],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.170961628796228, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_60d67f381c72875af4e9248e23d7d8ca = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e0f67facd629963d2227ae7593711ca7 = $(`<div id="html_e0f67facd629963d2227ae7593711ca7" style="width: 100.0%; height: 100.0%;"><b>Keaÿau High School</b><br>Total Enrollment: 1046<br>Native Hawaiian Students: 405<br>Percent Native Hawaiian: 38.7%</div>`)[0];
+                popup_60d67f381c72875af4e9248e23d7d8ca.setContent(html_e0f67facd629963d2227ae7593711ca7);
+            
+        
+
+        circle_marker_f72b8671febecc4251899040a1329838.bindPopup(popup_60d67f381c72875af4e9248e23d7d8ca)
+        ;
+
+        
+    
+    
+            var circle_marker_1048e638dee22d1fe556e9796720d62a = L.circleMarker(
+                [22.0882, -159.3377],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.850867484147358, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_522749e6edb4dc67c13ddedf619ae1d5 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_12557e308ba30dcae9813aebd10a15a6 = $(`<div id="html_12557e308ba30dcae9813aebd10a15a6" style="width: 100.0%; height: 100.0%;"><b>Kapaÿa High School</b><br>Total Enrollment: 1005<br>Native Hawaiian Students: 272<br>Percent Native Hawaiian: 27.1%</div>`)[0];
+                popup_522749e6edb4dc67c13ddedf619ae1d5.setContent(html_12557e308ba30dcae9813aebd10a15a6);
+            
+        
+
+        circle_marker_1048e638dee22d1fe556e9796720d62a.bindPopup(popup_522749e6edb4dc67c13ddedf619ae1d5)
+        ;
+
+        
+    
+    
+            var circle_marker_797a18594920a6ea5b20d6fcd21866e0 = L.circleMarker(
+                [21.9649, -159.3703],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.64331697709324, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_cbf803f1aac591c595ce5e2e79febc4b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3fe4d67df10d2d944ca216eb4cd174dd = $(`<div id="html_3fe4d67df10d2d944ca216eb4cd174dd" style="width: 100.0%; height: 100.0%;"><b>Kaua‘i High School</b><br>Total Enrollment: 1108<br>Native Hawaiian Students: 211<br>Percent Native Hawaiian: 19.0%</div>`)[0];
+                popup_cbf803f1aac591c595ce5e2e79febc4b.setContent(html_3fe4d67df10d2d944ca216eb4cd174dd);
+            
+        
+
+        circle_marker_797a18594920a6ea5b20d6fcd21866e0.bindPopup(popup_cbf803f1aac591c595ce5e2e79febc4b)
+        ;
+
+        
+    
+    
+            var circle_marker_92dc4d2f3b4730a0971a10c82a050cc4 = L.circleMarker(
+                [21.958103, -159.6678789],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.847382424126229, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_dd50c398396cd4a56b6546e7a29eb4c3 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_7ef4b8741457cf6cb85760e22532eb73 = $(`<div id="html_7ef4b8741457cf6cb85760e22532eb73" style="width: 100.0%; height: 100.0%;"><b>Waimea High School</b><br>Total Enrollment: 767<br>Native Hawaiian Students: 279<br>Percent Native Hawaiian: 36.4%</div>`)[0];
+                popup_dd50c398396cd4a56b6546e7a29eb4c3.setContent(html_7ef4b8741457cf6cb85760e22532eb73);
+            
+        
+
+        circle_marker_92dc4d2f3b4730a0971a10c82a050cc4.bindPopup(popup_dd50c398396cd4a56b6546e7a29eb4c3)
+        ;
+
+        
+    
+    
+            var circle_marker_5dbad3c4bdb70f00c63a68c8c719cd5b = L.circleMarker(
+                [20.8859, -156.4659],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.289341158171883, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_b6ec28d6be7b2fb55224534ded5409e9 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_88961d8fe762e3d1bd3e21961eab9414 = $(`<div id="html_88961d8fe762e3d1bd3e21961eab9414" style="width: 100.0%; height: 100.0%;"><b>Henry Perrine Baldwin High School</b><br>Total Enrollment: 1338<br>Native Hawaiian Students: 400<br>Percent Native Hawaiian: 29.9%</div>`)[0];
+                popup_b6ec28d6be7b2fb55224534ded5409e9.setContent(html_88961d8fe762e3d1bd3e21961eab9414);
+            
+        
+
+        circle_marker_5dbad3c4bdb70f00c63a68c8c719cd5b.bindPopup(popup_b6ec28d6be7b2fb55224534ded5409e9)
+        ;
+
+        
+    
+    
+            var circle_marker_9aad2476ceabdf9e019fa2d11d2c86c3 = L.circleMarker(
+                [20.8469, -156.3301],
+                {"bubblingMouseEvents": true, "color": "#fee08bff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fee08bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.08800749063506, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_fd24f2c5ca265f73a6aa0379dde64ac7 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_af36beb950b364cddfc38e2f5dbf2d96 = $(`<div id="html_af36beb950b364cddfc38e2f5dbf2d96" style="width: 100.0%; height: 100.0%;"><b>King Kekaulike High School</b><br>Total Enrollment: 1168<br>Native Hawaiian Students: 364<br>Percent Native Hawaiian: 31.2%</div>`)[0];
+                popup_fd24f2c5ca265f73a6aa0379dde64ac7.setContent(html_af36beb950b364cddfc38e2f5dbf2d96);
+            
+        
+
+        circle_marker_9aad2476ceabdf9e019fa2d11d2c86c3.bindPopup(popup_fd24f2c5ca265f73a6aa0379dde64ac7)
+        ;
+
+        
+    
+    
+            var circle_marker_fc0c8784d6ceaa5d97278fa7cc3a404d = L.circleMarker(
+                [20.8752257, -156.47297],
+                {"bubblingMouseEvents": true, "color": "#d73027ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.355088906108158, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_47c047a4c32bbefd139c48764f75ef80 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_7637defdf72c1aafd2126c62c7d11377 = $(`<div id="html_7637defdf72c1aafd2126c62c7d11377" style="width: 100.0%; height: 100.0%;"><b>Maui High School</b><br>Total Enrollment: 1999<br>Native Hawaiian Students: 265<br>Percent Native Hawaiian: 13.3%</div>`)[0];
+                popup_47c047a4c32bbefd139c48764f75ef80.setContent(html_7637defdf72c1aafd2126c62c7d11377);
+            
+        
+
+        circle_marker_fc0c8784d6ceaa5d97278fa7cc3a404d.bindPopup(popup_47c047a4c32bbefd139c48764f75ef80)
+        ;
+
+        
+    
+    
+            var circle_marker_c2eb79278e1d2f497322bd8f671c4daf = L.circleMarker(
+                [20.8889585, -156.6597881],
+                {"bubblingMouseEvents": true, "color": "#fc8d59ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fc8d59ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.101242188104617, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_9eed747015f88410e81edcc7662a8d5f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_67d5e729326550127a32a7d6a3c149d9 = $(`<div id="html_67d5e729326550127a32a7d6a3c149d9" style="width: 100.0%; height: 100.0%;"><b>Lahainaluna High School</b><br>Total Enrollment: 1037<br>Native Hawaiian Students: 218<br>Percent Native Hawaiian: 21.0%</div>`)[0];
+                popup_9eed747015f88410e81edcc7662a8d5f.setContent(html_67d5e729326550127a32a7d6a3c149d9);
+            
+        
+
+        circle_marker_c2eb79278e1d2f497322bd8f671c4daf.bindPopup(popup_9eed747015f88410e81edcc7662a8d5f)
+        ;
+
+        
+    
+    
+            var circle_marker_de6d329fb54926de97d73543da6e7dfd = L.circleMarker(
+                [21.1631647, -157.0482432],
+                {"bubblingMouseEvents": true, "color": "#91cf60ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#91cf60ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.759610647971568, "stroke": true, "weight": 3}
+            ).addTo(map_25f20dcb5bc7b3c3a30a82e2e6d69f5a);
+        
+    
+        var popup_7a185486fe31ea2dfbab1fc0a1747bbf = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ef77fa0486ea138911792d9e328c02c1 = $(`<div id="html_ef77fa0486ea138911792d9e328c02c1" style="width: 100.0%; height: 100.0%;"><b>Moloka‘i High School</b><br>Total Enrollment: 381<br>Native Hawaiian Students: 313<br>Percent Native Hawaiian: 82.2%</div>`)[0];
+                popup_7a185486fe31ea2dfbab1fc0a1747bbf.setContent(html_ef77fa0486ea138911792d9e328c02c1);
+            
+        
+
+        circle_marker_de6d329fb54926de97d73543da6e7dfd.bindPopup(popup_7a185486fe31ea2dfbab1fc0a1747bbf)
+        ;
+
+        
+    
+</script>
+</html>
